@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Service;
 use App\Tool\Validate\ValidateCode;
 use App\Http\Controllers\Controller;
 use App\Tool\SMS\SendTemplateSMS;
+use App\Entity\TemPhone;
 
 
 class ValidateController extends Controller
@@ -25,6 +26,8 @@ class ValidateController extends Controller
           $code .= $charset[mt_rand(0, $_len)];
       }
       $sendTemplateSMS->sendTemplateSMS(17600000000, array($code, 60), 1);
+
+      $tempPhone = new TemPhone;
 
       return 'xx';
   }
