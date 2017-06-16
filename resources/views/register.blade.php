@@ -108,21 +108,6 @@
       }
 
   });
-//  $('input:radio[name=register_type]').click(function(event) {
-//    $('input:radio[name=register_type]').attr('checked', false);
-//    $(this).attr('checked', true);
-//    if($(this).attr('id') == 'x11') {
-//      $('#x11').next().show();
-//      $('#x12').next().hide();
-//      $('.weui_cells_form').eq(0).show();
-//      $('.weui_cells_form').eq(1).hide();
-//    } else if($(this).attr('id') == 'x12') {
-//      $('#x12').next().show();
-//      $('#x11').next().hide();
-//      $('.weui_cells_form').eq(1).show();
-//      $('.weui_cells_form').eq(0).hide();
-//    }
-//  });
 
   $('.bk_validate_code').click(function () {
     $(this).attr('src', '/service/validate_code/create?random=' + Math.random());

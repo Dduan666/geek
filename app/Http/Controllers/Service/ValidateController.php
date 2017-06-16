@@ -4,19 +4,21 @@ namespace App\Http\Controllers\Service;
 
 use App\Tool\Validate\ValidateCode;
 use App\Http\Controllers\Controller;
-use App\Tool\SMS\SendTemplateSMS;
+
 use Illuminate\Http\Request;
+use App\Tool\SMS\SendTemplateSMS;
+use App\Entity\TempPhone;
 use App\Models\M3Result;
-use App\Entity\TemPhone;
+
 
 
 class ValidateController extends Controller
 {
-  public function create($value = '')
-  {
-    $validateCode = new ValidateCode;
-    return $validateCode ->doimg();
-  }
+    public function create($value = '')
+    {
+        $validateCode = new ValidateCode;
+        return $validateCode ->doimg();
+    }
 
     public function sendSMS(Request $request)
     {
@@ -41,7 +43,7 @@ class ValidateController extends Controller
         for ($i = 0;$i < 6;++$i) {
             $code .= $charset[mt_rand(0, $_len)];
         }
-        $m3_result = $sendTemplateSMS->sendTemplateSMS( $phone, array($code, 60), 1);
+        $m3_result = $sendTemplateSMS->sendTemplateSMS( $phone, array($code, 5), 1);
         if($m3_result->status == 0) {
             $tempPhone = TempPhone::where('phone', $phone)->first();
             if($tempPhone == null) {
