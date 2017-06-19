@@ -9,6 +9,7 @@ class MemberController extends Controller
   public function toLogin($value='')
   {
     return view('login');
+
   }
 
   public function toRegister($value='')
