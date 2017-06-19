@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 use App\Models\M3Result;
 use App\Entity\Member;
 use App\Entity\TempPhone;
+use App\Entity\TempEmail;
+use App\Models\M3Email;
+use App\Tool\UUID;
+use Mail;
+
 
 class MemberController extends Controller
 {
@@ -92,6 +97,29 @@ class MemberController extends Controller
             $member -> email = $email;
             $member -> password = md5('bk' + $password);
             $member -> save();
+
+            $uuid = UUID::create();
+
+            $m3_email = new M3Email;
+            $m3_email -> to = $email;
+            $m3_email -> cc = 'dduan666@163.com';
+            $m3_email -> subject = '极客验证';
+            $m3_email -> content = '请于24小时点击该链接完成验证. http://www.geek.com/service/validate_email'
+                                .  '?member_id=' . $member -> id
+                                .  '&code=' . $uuid;
+
+//            $tempEmail = new TempEmail;
+//            $tempEmail->member_id = $member->id;
+//            $tempEmail->code = $uuid;
+//            $tempEmail->deadline = date('Y-m-d H-i-s', time() + 24*60*60);
+//            $tempEmail->save();
+
+            Mail::send('email_register', ['m3_email' => $m3_email], function ($m) use ($m3_email) {
+                // $m->from('hello@app.com', 'Your Application');
+                $m->to($m3_email->to, '尊敬的用户')
+                    ->cc($m3_email->cc)
+                    ->subject($m3_email->subject);
+            });
 
             $m3_result->status = 0;
             $m3_result->message = '注册成功';
