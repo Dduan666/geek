@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="/css/geek.css">
 </head>
 <body>
+<div class="bk_title_bar">
+    <img class="bk_back" src="/images/back.png" alt="" onclick="history.go(-1);">
+    <p class="bk_title_content"></p>
+    <img class="bk_menu" src="/images/menu.png" alt="" onclick="onMenuClick();">
+</div>
 
 <div class="page">
     @yield('content')
@@ -15,10 +20,6 @@
 
 <!-- tooltips -->
 <div class="bk_toptips"><span></span></div>
-
-<div id="global_menu" onclick="onMenuClick();">
-    <div></div>
-</div>
 
 <!--BEGIN actionSheet-->
 <div id="actionSheet_wrap">
@@ -78,6 +79,8 @@
             setTimeout(function() {$('.bk_toptips').hide();}, 2000);
         }
     }
+    // 将标题栏与标题保持一致
+    $('.bk_title_content').html(document.title);
 </script>
 
 @yield('my-js')
