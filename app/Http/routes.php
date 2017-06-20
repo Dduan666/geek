@@ -18,7 +18,18 @@ Route::get('/', function () {
 Route::get('/login','View\MemberController@toLogin');
 Route::get('/register','View\MemberController@toRegister');
 
-Route::any('service/validate_code/create', 'Service\ValidateController@create');
-Route::any('service/validate_phone/send', 'Service\ValidateController@sendSMS');
-Route::any('service/validate_email', 'Service\ValidateController@validateEmail');
-Route::post('service/register', 'Service\MemberController@register');
+Route::group(['prefix' => 'service'], function () {
+    Route::get('validate_code/create', 'Service\ValidateController@create');
+    Route::post('validate_phone/send', 'Service\ValidateController@sendSMS');
+    // Route::post('validate_email', 'Service\ValidateController@validateEmail');
+    Route::post('register', 'Service\MemberController@register');
+    Route::post('login', 'Service\MemberController@login');
+});
+
+
+
+
+//测试登录跳转
+Route::get('category', function () {
+    return view('/category');
+});

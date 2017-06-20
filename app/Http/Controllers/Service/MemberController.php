@@ -16,6 +16,7 @@ use Mail;
 
 class MemberController extends Controller
 {
+    //注册
     public function register(Request $request)
     {
         $email = $request -> input('email','');
@@ -108,11 +109,11 @@ class MemberController extends Controller
                                 .  '?member_id=' . $member -> id
                                 .  '&code=' . $uuid;
 
-//            $tempEmail = new TempEmail;
-//            $tempEmail->member_id = $member->id;
-//            $tempEmail->code = $uuid;
-//            $tempEmail->deadline = date('Y-m-d H-i-s', time() + 24*60*60);
-//            $tempEmail->save();
+            $tempEmail = new TempEmail;
+            $tempEmail->member_id = $member->id;
+            $tempEmail->code = $uuid;
+            $tempEmail->deadline = date('Y-m-d H-i-s', time() + 24*60*60);
+            $tempEmail->save();
 
             Mail::send('email_register', ['m3_email' => $m3_email], function ($m) use ($m3_email) {
                 // $m->from('hello@app.com', 'Your Application');
@@ -125,5 +126,59 @@ class MemberController extends Controller
             $m3_result->message = '注册成功';
             return $m3_result->toJson();
         }
+    }
+
+    //登录
+    public function login(Request $request)
+    {
+        $username = $request -> get('username','');
+        $password = $request -> get('password','');
+        $validate_code = $request -> get('validate_code','');
+
+        $m3_result = new M3Result;
+
+        //校验
+        if($username == '') {
+            $m3_result->status = 1;
+            $m3_result->message = '账号不能为空';
+            return $m3_result->toJson();
+        }
+        if($password == '' || strlen($password) < 6) {
+            $m3_result->status = 2;
+            $m3_result->message = '密码不少于6位';
+            return $m3_result->toJson();
+        }
+        //判断
+        $validate_code_session = $request->session()->get('validate_code');
+        if ($validate_code != $validate_code_session){
+            $m3_result -> status = 3;
+            $m3_result -> message = '验证码不正确';
+            return $m3_result -> toJson();
+        }
+
+        $member = null;
+        if (strpos($username,'@') == true){
+            $member = Member::where('email', $username) -> first();
+        }else{
+            $member = Member::where('phone', $username) -> first();
+        }
+
+        if ($member == null){
+            $m3_result -> status = 4;
+            $m3_result -> message = '该用户不存在！';
+            return $m3_result -> toJson();
+        }else{
+            if (md5('bk' + $password) != $member -> password){
+                $m3_result -> status = 3;
+                $m3_result -> message = '密码不正确！';
+                return $m3_result -> toJson();
+            }
+        }
+
+        $request -> session() -> put('member',$member);
+
+        $m3_result -> status = 0;
+        $m3_result -> message = '登录成功！';
+        return $m3_result -> toJson();
     }
 }
