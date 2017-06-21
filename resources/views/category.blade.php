@@ -51,6 +51,8 @@
                 dataType: 'json',
                 cache: false,
                 success: function(data) {
+                    console.log('获取类别数据：');
+                    console.log(data);
                     if(data == null) {
                         $('.bk_toptips').show();
                         $('.bk_toptips span').html('服务端错误');

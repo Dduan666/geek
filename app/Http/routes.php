@@ -20,6 +20,7 @@ Route::get('/register','View\MemberController@toRegister');
 
 Route::get('/category','View\GeekController@toCategory');
 Route::get('/product/category_id/{category_id}', 'View\GeekController@toProduct');
+Route::get('/product/{product_id}', 'View\GeekController@toPdtContent');
 
 Route::group(['prefix' => 'service'], function () {
     Route::get('validate_code/create', 'Service\ValidateController@create');
