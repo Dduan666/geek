@@ -28,7 +28,9 @@ Route::group(['prefix' => 'service'], function () {
 //     Route::post('validate_email', 'Service\ValidateController@validateEmail');
     Route::post('register', 'Service\MemberController@register');
     Route::post('login', 'Service\MemberController@login');
+
     Route::get('category/parent_id/{parent_id}', 'Service\GeekController@getCategoryByParentId');
+    Route::get('cart/add/{parent_id}', 'Service\CartController@addCart');
 });
 
 
