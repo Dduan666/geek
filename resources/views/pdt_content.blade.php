@@ -35,7 +35,11 @@
         <div class="weui_cells_title">详细介绍</div>
         <div class="weui_cells">
             <div class="weui_cell">
-                <p>{!! $pdt_content->content !!}</p>
+                @if($pdt_content != null)
+                    {!! $pdt_content->content !!}
+                @else
+                    <p>该产品无详细信息！</p>
+                @endif
             </div>
         </div>
     </div>

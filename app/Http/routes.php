@@ -22,6 +22,8 @@ Route::get('/category','View\GeekController@toCategory');
 Route::get('/product/category_id/{category_id}', 'View\GeekController@toProduct');
 Route::get('/product/{product_id}', 'View\GeekController@toPdtContent');
 
+Route::get('cart', 'View\CartController@toCart');
+
 Route::group(['prefix' => 'service'], function () {
     Route::get('validate_code/create', 'Service\ValidateController@create');
     Route::post('validate_phone/send', 'Service\ValidateController@sendSMS');
@@ -31,6 +33,11 @@ Route::group(['prefix' => 'service'], function () {
 
     Route::get('category/parent_id/{parent_id}', 'Service\GeekController@getCategoryByParentId');
     Route::get('cart/add/{parent_id}', 'Service\CartController@addCart');
+    Route::get('cart/delete', 'Service\CartController@deleteCart');
+});
+
+Route::group(['middleware' => 'check.login'], function () {
+
 });
 
 
