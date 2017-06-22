@@ -42,7 +42,6 @@
 
 @section('my-js')
     <script>
-
         $('input:checkbox[name=cart_item]').click(function (event) {
             var checked = $(this).attr('checked');
             if (checked == 'checked') {
@@ -54,7 +53,12 @@
                 $(this).next().removeClass('weui_icon_unchecked');
                 $(this).next().addClass('weui_icon_checked');
             }
-        })
+        });
+        
+        function _toCharge() {
+            var cart_item_arr = '';
+            location.href = '/order_pay?cart_item_ids=' + cart_item_arr;
+        }
 
         function _onDelete() {
             var product_ids_arr = [];
