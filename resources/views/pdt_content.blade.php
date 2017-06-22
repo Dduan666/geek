@@ -45,7 +45,7 @@
             <button class="weui_btn weui_btn_primary" onclick="_addCart();">加入购物车</button>
         </div>
         <div class="bk_half_area">
-            <button class="weui_btn weui_btn_default" onclick="_toCart()">查看购物车(<span id="cart_num" class="m3_price"></span>)</button>
+            <button class="weui_btn weui_btn_default" onclick="_toCart()">查看购物车(<span id="cart_num" class="m3_price">{{$count}}</span>)</button>
         </div>
     </div>
 @endsection
@@ -93,6 +93,8 @@
                     if(num == '') num = 0;
                     $('#cart_num').html(Number(num) + 1);
 
+                    console.log(data);
+
                 },
                 error: function(xhr, status, error) {
                     console.log(xhr);
@@ -100,6 +102,10 @@
                     console.log(error);
                 }
             });
+        }
+
+        function _toCart() {
+            location.href = '/cart';
         }
     </script>
 @endsection
