@@ -22,7 +22,8 @@ Route::get('/category','View\GeekController@toCategory');
 Route::get('/product/category_id/{category_id}', 'View\GeekController@toProduct');
 Route::get('/product/{product_id}', 'View\GeekController@toPdtContent');
 
-Route::get('cart', 'View\CartController@toCart');
+Route::get('/cart', 'View\CartController@toCart');
+
 
 Route::group(['prefix' => 'service'], function () {
     Route::get('validate_code/create', 'Service\ValidateController@create');
@@ -38,6 +39,8 @@ Route::group(['prefix' => 'service'], function () {
 
 Route::group(['middleware' => 'check.login'], function () {
 
+    Route::get('/order_commit/{product_ids}', 'View\OrderController@toOrderCommit');
+    Route::get('/order_list', 'View\OrderController@toOrderList');
 });
 
 
