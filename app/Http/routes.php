@@ -43,5 +43,7 @@ Route::group(['middleware' => 'check.login'], function () {
     Route::get('/order_list', 'View\OrderController@toOrderList');
 });
 
+Route::get('/or_code', 'View\OrCodeController@toOrCode');
+
 
 
