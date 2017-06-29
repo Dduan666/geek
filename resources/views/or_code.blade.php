@@ -1,11 +1,12 @@
 @extends('master')
 
-@section('title', '产品类别')
+@section('title', '邀请码')
 
 @section('content')
-    <div class="visible-print text-center">
-        {!! QrCode::size(100)->generate(Request::url()) !!}
-        <p>Scan me to return to the original page.</p>
+    <div class="weui_btn_area">
+        <a class="weui_btn" href="javascript:">
+            {!! $code !!}
+        </a>
     </div>
-    {{--<p>this is or_code</p>--}}
+
 @endsection

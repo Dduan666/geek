@@ -35,15 +35,16 @@ Route::group(['prefix' => 'service'], function () {
     Route::get('category/parent_id/{parent_id}', 'Service\GeekController@getCategoryByParentId');
     Route::get('cart/add/{parent_id}', 'Service\CartController@addCart');
     Route::get('cart/delete', 'Service\CartController@deleteCart');
+    Route::post('/add_code', 'Service\OrCodeController@toCode');
 });
 
 Route::group(['middleware' => 'check.login'], function () {
-
     Route::get('/order_commit/{product_ids}', 'View\OrderController@toOrderCommit');
     Route::get('/order_list', 'View\OrderController@toOrderList');
 });
 
 Route::get('/or_code', 'View\OrCodeController@toOrCode');
+Route::get('/add_code', 'View\OrCodeController@toAddCode');
 
 
 

@@ -145,14 +145,16 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Simple QrCode 扩展包生成二维码...
+         */
+
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+
 
 
     ],
-    /*
-    * Simple QrCode 扩展包生成二维码...
-    */
 
-    SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
 
     /*
     |--------------------------------------------------------------------------
