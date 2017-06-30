@@ -77,7 +77,7 @@ class OrderController extends Controller
                 $order_item->save();
             }
         }
-        CartItem::whereIn('id', $cart_items_ids_arr)->delete();
+            CartItem::whereIn('id', $cart_items_ids_arr)->delete();
 
         $order->name = $name;
         $order->total_price = $total_price;
