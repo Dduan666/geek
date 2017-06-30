@@ -14,6 +14,9 @@ use app\Entity\Member;
 Route::get('/', function () {
     return view('welcome');
 });
+/**
+ *  前端相关
+ */
 
 Route::get('/login','View\MemberController@toLogin');
 Route::get('/register','View\MemberController@toRegister');
@@ -23,7 +26,6 @@ Route::get('/product/category_id/{category_id}', 'View\GeekController@toProduct'
 Route::get('/product/{product_id}', 'View\GeekController@toPdtContent');
 
 Route::get('/cart', 'View\CartController@toCart');
-
 
 Route::group(['prefix' => 'service'], function () {
     Route::get('validate_code/create', 'Service\ValidateController@create');
@@ -38,12 +40,19 @@ Route::group(['prefix' => 'service'], function () {
 });
 
 Route::group(['middleware' => 'check.login'], function () {
-
     Route::get('/order_commit/{product_ids}', 'View\OrderController@toOrderCommit');
     Route::get('/order_list', 'View\OrderController@toOrderList');
 });
 
 Route::get('/or_code', 'View\OrCodeController@toOrCode');
 
+/**
+ *  后台相关
+ */
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('index', 'Admin\IndexController@toIndex');
+    Route::get('login', 'Admin\IndexController@toLogin');
+});
 
 
