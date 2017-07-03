@@ -55,6 +55,11 @@ Route::get('/add_code', 'View\OrCodeController@toAddCode');
 Route::group(['prefix' => 'admin'], function () {
     Route::get('index', 'Admin\IndexController@toIndex');
     Route::get('login', 'Admin\IndexController@toLogin');
+
+    Route::get('welcome', 'Admin\IndexController@toWelcome');
+
+    Route::get('category', 'Admin\CategoryController@toCategory');
+    Route::get('category_add', 'Admin\CategoryController@toCategoryAdd');
 });
 
 
