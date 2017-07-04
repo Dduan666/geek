@@ -3,6 +3,7 @@
 @section('content')
     <div class="page-container">
         <form action="" method="post" class="form form-horizontal" id="form-category-add">
+            {{ csrf_field() }}
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>名称：</label>
                 <div class="formControls col-xs-7 col-sm-5">
@@ -31,7 +32,7 @@
 
             <div class="row cl">
                 <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                    <button onClick="article_save_submit();" class="btn btn-primary radius" type="submit">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
+                    <button class="btn btn-primary radius" type="submit">&nbsp;&nbsp;提交&nbsp;&nbsp;</button>
                 </div>
             </div>
         </form>
@@ -51,26 +52,48 @@
                     },
                     parent_id:{
                         required:true,
-
                     },
                 },
                 onkeyup:false,
                 focusCleanup:true,
                 success:"valid",
                 submitHandler:function(form){
-                    $(form).ajaxSubmit({
-                        type: 'post',
-                        url: "xxxxxxx" ,
-                        success: function(data){
-                            layer.msg('添加成功!',{icon:1,time:1000});
-                        },
-                        error: function(XmlHttpRequest, textStatus, errorThrown){
-                            layer.msg('error!',{icon:1,time:1000});
-                        }
-                    });
-                    var index = parent.layer.getFrameIndex(window.name);
-                    parent.$('.btn-refresh').click();
-                    parent.layer.close(index);
+                    var name = $('input[name=name]').val();
+                    var category_no = $('input[name=category_no]').val();
+                    var parent_id = $('select[name=parent_id] option:selected').val();
+//                    preview: ($('#preview_id').attr('src')!='/admin/images/icon-add.png'?$('#preview_id').attr('src'):'');
+                    console.log(name);
+                    return false;
+                    {{--$(form).ajaxSubmit({--}}
+                        {{--type: 'post',--}}
+                        {{--datatype: 'json',--}}
+                        {{--url: '/admin/service/category/add' ,--}}
+                        {{--data: {name: name, category_no: category_no, parent_id: parent_id, _token: "{{csrf_token()}}"},--}}
+                        {{--success: function(data){--}}
+                            {{--if(data == null) {--}}
+                                {{--layer.msg('服务端错误', {icon:2, time:2000});--}}
+                                {{--return;--}}
+                            {{--}--}}
+                            {{--if(data.status != 0) {--}}
+                                {{--layer.msg(data.message, {icon:2, time:2000});--}}
+                                {{--return;--}}
+                            {{--}--}}
+
+                            {{--layer.msg(data.message, {icon:1, time:2000});--}}
+                            {{--parent.location.reload();--}}
+                        {{--},--}}
+                        {{--error: function(xhr, status, error) {--}}
+                            {{--console.log(xhr);--}}
+                            {{--console.log(status);--}}
+                            {{--console.log(error);--}}
+                            {{--layer.msg('ajax error', {icon:2, time:2000});--}}
+                        {{--},--}}
+                        {{--beforeSend: function(xhr){--}}
+                            {{--layer.load(0, {shade: false});--}}
+                        {{--},--}}
+                    {{--});--}}
+
+                    return false;
                 }
             });
         });
