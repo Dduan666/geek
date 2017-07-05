@@ -6,6 +6,8 @@ use App\Entity\Category;
 use Illuminate\Http\Request;
 use App\Models\M3Result;
 
+use Log;
+
 class CategoryController extends Controller
 {
     public function toCategory()
@@ -27,6 +29,7 @@ class CategoryController extends Controller
                     /************************service***************************/
     public function CategoryAdd(Request $request)
     {
+        Log::info('添加类别');
         $name = $request -> input('name', '');
         $numer = $request -> input('number', '');
         $parent_id = $request -> input('parent_id', '');

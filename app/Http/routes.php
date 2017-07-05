@@ -58,7 +58,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('welcome', 'Admin\IndexController@toWelcome');
 
     Route::group(['prefix' => 'service'], function () {
-        Route::get('category/add', 'Admin\CategoryController@CategoryAdd');
+        Route::post('category/add', 'Admin\CategoryController@CategoryAdd');
     });
 
     Route::get('category', 'Admin\CategoryController@toCategory');
