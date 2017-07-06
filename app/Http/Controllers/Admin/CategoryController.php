@@ -73,7 +73,7 @@ class CategoryController extends Controller
 //        $preview = $request -> input('preview', '');
 
         $category = new Category;
-        $category -> id = $id;
+//        $category -> id = $id;
         $category -> name = $name;
         $category -> category_no = $category_no;
         if ($parent_id != '') {
@@ -81,7 +81,7 @@ class CategoryController extends Controller
         }
 
 
-        $category -> save();
+        $category -> where('id', $id) -> save();
 
         $m3_result = new M3Result;
         $m3_result -> status = 0;

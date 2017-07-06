@@ -47,6 +47,7 @@
 @endsection
 
 @section('my-js')
+    <script src="/admin/lib/uploadFile.js"></script>
     <script>
         $(function () {
             $("#form-category-add").validate({
