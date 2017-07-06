@@ -59,10 +59,14 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::group(['prefix' => 'service'], function () {
         Route::post('category/add', 'Admin\CategoryController@CategoryAdd');
+        Route::post('category/edit', 'Admin\CategoryController@CategoryEdit');
+        Route::post('category/del', 'Admin\CategoryController@CategoryDel');
+
     });
 
     Route::get('category', 'Admin\CategoryController@toCategory');
     Route::get('category_add', 'Admin\CategoryController@toCategoryAdd');
+    Route::get('category_edit', 'Admin\CategoryController@toCategoryEdit');
 });
 
 

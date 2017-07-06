@@ -38,8 +38,8 @@
                         @endif
                     </td>
                     <td class="f-14 product-brand-manage">
-                        <a style="text-decoration:none" onclick="product_brand_edit('品牌编辑','codeing.html','1')" href="javascript:;" title="编辑"><i class="Hui-iconfont"></i></a>
-                        <a style="text-decoration:none" class="ml-5" onclick="active_del(this,'10001')" href="javascript:;" title="删除"><i class="Hui-iconfont"></i></a>
+                        <a style="text-decoration:none" onclick="category_edit('编辑类别','/admin/category_edit?id={{$category->id}}')" href="javascript:;" title="编辑"><i class="Hui-iconfont"></i></a>
+                        <a style="text-decoration:none" class="ml-5" onclick='category_del("{{$category -> name}}", "{{$category -> id}}")' href="javascript:;" title="删除"><i class="Hui-iconfont"></i></a>
                     </td>
                 </tr>
                 @endforeach
@@ -51,7 +51,7 @@
 
 @section('my-js')
     <script>
-        /*产品-添加*/
+        /*类别-添加*/
         function category_add(title,url){
             var index = layer.open({
                 type: 2,
@@ -59,6 +59,53 @@
                 content: url
             });
             layer.full(index);
+        }
+
+        /*类别-添加*/
+        function category_edit(title,url){
+            var index = layer.open({
+                type: 2,
+                title: title,
+                content: url
+            });
+            layer.full(index);
+        }
+
+        /*类别-删除*/
+        function category_del(name,id) {
+            layer.confirm('确认要删除【' + name +'】吗？',function(index){
+                $.ajax({
+                    type: 'post', // 提交方式 get/post
+                    url: '/admin/service/category/del', // 需要提交的 url
+                    dataType: 'json',
+                    data: {
+                        id: id,
+                        _token: "{{csrf_token()}}"
+                    },
+                    success: function(data) {
+                        if(data == null) {
+                            layer.msg('服务端错误', {icon:2, time:2000});
+                            return;
+                        }
+                        if(data.status != 0) {
+                            layer.msg(data.message, {icon:2, time:2000});
+                            return;
+                        }
+
+                        layer.msg(data.message, {icon:1, time:2000});
+                        location.replace(location.href);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr);
+                        console.log(status);
+                        console.log(error);
+                        layer.msg('ajax error', {icon:2, time:2000});
+                    },
+                    beforeSend: function(xhr){
+                        layer.load(0, {shade: false});
+                    }
+                });
+            });
         }
     </script>
 @endsection

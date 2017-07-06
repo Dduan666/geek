@@ -2,18 +2,18 @@
 
 @section('content')
     <div class="page-container">
-        <form action="" method="post" class="form form-horizontal" id="form-category-add">
+        <form action="" method="post" class="form form-horizontal" id="form-category-edit">
             {{ csrf_field() }}
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>名称：</label>
                 <div class="formControls col-xs-7 col-sm-5">
-                    <input type="text" class="input-text" value="" datatype="*" placeholder="" name="name" nullmsg="名称不能为空">
+                    <input type="text" class="input-text" value="{{$category -> name}}" datatype="*" placeholder="" name="name" nullmsg="名称不能为空">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>序号：</label>
                 <div class="formControls col-xs-7 col-sm-5">
-                    <input type="number" class="input-text" value="0" datatype="*" placeholder="" name="category_no">
+                    <input type="number" class="input-text" value="{{$category -> category_no}}" datatype="*" placeholder="" name="category_no">
                 </div>
             </div>
             <div class="row cl">
@@ -22,8 +22,12 @@
                     <span class="select-box" style="width: 200px;">
                         <select name="parent_id" class="select">
                             <option value="0">无</option>
-                            @foreach($categories as $category)
-                                <option value="{{$category -> id}}">{{$category -> name}}</option>
+                            @foreach($categories as $temp)
+                                @if($category -> parent_id == $temp -> id)
+                                    <option selected value="{{$temp -> id}}">{{$temp -> name}}</option>
+                                @elseif($category -> parent_id != $temp -> id)
+                                    <option value="{{$temp -> id}}">{{$temp -> name}}</option>
+                                @endif
                             @endforeach
                         </select>
 				    </span>
@@ -49,7 +53,7 @@
 @section('my-js')
     <script>
         $(function () {
-            $("#form-category-add").validate({
+            $("#form-category-edit").validate({
                 rules:{
                     name:{
                         required:true,
@@ -65,6 +69,7 @@
                 focusCleanup:true,
                 success:"valid",
                 submitHandler:function(form){
+                    var id = "{{$category -> id}}";
                     var name = $('input[name=name]').val();
                     var category_no = $('input[name=category_no]').val();
                     var parent_id = $('select[name=parent_id] option:selected').val();
@@ -74,8 +79,8 @@
                     $(form).ajaxSubmit({
                         type: 'POST',
                         dataType: 'json',
-                        url: '/admin/service/category/add' ,
-                        data: {name: name, category_no: category_no, parent_id: parent_id, _token: "{{csrf_token()}}"},
+                        url: '/admin/service/category/edit' ,
+                        data: {id: id, name: name, category_no: category_no, parent_id: parent_id, _token: "{{csrf_token()}}"},
                         success: function(data){
                             if(data == null) {
                                 layer.msg('服务端错误', {icon:2, time:2000});
