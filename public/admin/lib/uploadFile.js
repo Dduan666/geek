@@ -21,6 +21,7 @@ function uploadImageToServer(fileElmId, type, id)
 {
 	$("#"+id).attr("src", "/admin/images/loading_072.gif");
 	$.ajaxFileUpload({
+        type: 'POST',
 		url: '/service/upload/' + type,
 		fileElementId: fileElmId,
 		dataType: 'text',
@@ -30,7 +31,9 @@ function uploadImageToServer(fileElmId, type, id)
 			$("#"+id).attr("src", result.uri);
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
-		  alert(errorThrown);
+			console.log(XMLHttpRequest);
+            console.log(textStatus);
+            console.log(errorThrown);
     	}
 	});
 	return false;

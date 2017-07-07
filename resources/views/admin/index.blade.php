@@ -7,9 +7,9 @@
     <header class="navbar-wrapper">
         <div class="navbar navbar-fixed-top">
             <div class="container-fluid cl">
-                <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">H-ui.admin</a>
+                <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/admin/index">Geek</a>
                 <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a>
-                <span class="logo navbar-slogan f-l mr-10 hidden-xs">v3.0</span>
+                <span class="logo navbar-slogan f-l mr-10 hidden-xs">后台</span>
                 <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;"></a>
                 <nav class="nav navbar-nav">
                     <ul class="cl">
@@ -77,8 +77,8 @@
                 </dt>
                 <dd>
                     <ul>
-                        <li><a data-href="category" data-title="品牌管理" href="javascript:void(0)">分类管理</a></li>
-                        <li><a data-href="product-list.html" data-title="产品管理" href="javascript:void(0)">产品管理</a></li>
+                        <li><a data-href="category" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
+                        <li><a data-href="product" data-title="产品列表" href="javascript:void(0)">产品列表</a></li>
                     </ul>
                 </dd>
             </dl>

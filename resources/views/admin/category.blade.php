@@ -19,10 +19,11 @@
             <table class="table table-border table-bordered table-bg table-sort">
                 <thead>
                 <tr class="text-c">
-                    <th width="70">ID</th>
-                    <th width="80">名称</th>
-                    <th width="200">编号</th>
-                    <th width="120">父类别</th>
+                    <th width="80">ID</th>
+                    <th width="100">名称</th>
+                    <th width="40">编号</th>
+                    <th width="90">父类别</th>
+                    <th width="50">预览图</th>
                     <th width="100">操作</th>
                 </tr>
                 </thead>
@@ -32,11 +33,13 @@
                     <td>{{$category -> id}}</td>
                     <td>{{$category -> name}}</td>
                     <td>{{$category -> category_no}}</td>
-                    <td>
-                        @if($category->parent != null)
+                    <td>@if($category->parent != null)
                             {{$category -> parent -> name}}
-                        @endif
-                    </td>
+                        @endif</td>
+                    <td>@if($category -> preview != null)
+                            <img src="{{$category->preview}}" alt="" style="width: 50px; height: 50px;">
+                        @endif</td>
+
                     <td class="f-14 product-brand-manage">
                         <a style="text-decoration:none" onclick="category_edit('编辑类别','/admin/category_edit?id={{$category->id}}')" href="javascript:;" title="编辑"><i class="Hui-iconfont"></i></a>
                         <a style="text-decoration:none" class="ml-5" onclick='category_del("{{$category -> name}}", "{{$category -> id}}")' href="javascript:;" title="删除"><i class="Hui-iconfont"></i></a>

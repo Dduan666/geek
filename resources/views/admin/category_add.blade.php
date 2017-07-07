@@ -3,7 +3,7 @@
 @section('content')
     <div class="page-container">
         <form action="" method="post" class="form form-horizontal" id="form-category-add">
-            {{ csrf_field() }}
+            {{--{{ csrf_field() }}--}}
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>名称：</label>
                 <div class="formControls col-xs-7 col-sm-5">
@@ -47,7 +47,6 @@
 @endsection
 
 @section('my-js')
-    <script src="/admin/lib/uploadFile.js"></script>
     <script>
         $(function () {
             $("#form-category-add").validate({
@@ -69,14 +68,14 @@
                     var name = $('input[name=name]').val();
                     var category_no = $('input[name=category_no]').val();
                     var parent_id = $('select[name=parent_id] option:selected').val();
-//                    var preview = ($('#preview_id').attr('src')!='/admin/images/icon-add.png'?$('#preview_id').attr('src'):'');
+                    var preview = ($('#preview_id').attr('src')!='/admin/images/icon-add.png'?$('#preview_id').attr('src'):'');
 
 
                     $(form).ajaxSubmit({
                         type: 'POST',
                         dataType: 'json',
                         url: '/admin/service/category/add' ,
-                        data: {name: name, category_no: category_no, parent_id: parent_id, _token: "{{csrf_token()}}"},
+                        data: {name: name, category_no: category_no, parent_id: parent_id, preview: preview, _token: "{{csrf_token()}}"},
                         success: function(data){
                             if(data == null) {
                                 layer.msg('服务端错误', {icon:2, time:2000});

@@ -43,12 +43,12 @@ class CategoryController extends Controller
         $name = $request -> input('name', '');
         $category_no = $request -> input('category_no', '');
         $parent_id = $request -> input('parent_id', '');
-//        $preview = $request -> input('preview', '');
+        $preview = $request -> input('preview', '');
 
         $category = new Category;
         $category -> name = $name;
         $category -> category_no = $category_no;
-//        $category -> preview = $preview;
+        $category -> preview = $preview;
         if ($parent_id != '') {
             $category -> parent_id = $parent_id;
         }
@@ -70,10 +70,10 @@ class CategoryController extends Controller
         $name = $request -> input('name', '');
         $category_no = $request -> input('category_no', '');
         $parent_id = $request -> input('parent_id', '');
-//        $preview = $request -> input('preview', '');
+        $preview = $request -> input('preview', '');
 
         $category = new Category;
-//        $category -> id = $id;
+        $category -> id = $id;
         $category -> name = $name;
         $category -> category_no = $category_no;
         if ($parent_id != '') {

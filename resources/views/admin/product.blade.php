@@ -1,0 +1,48 @@
+@extends('admin.master')
+
+@section('content')
+    <nav class="breadcrumb">
+        <i class="Hui-iconfont"></i> 首页
+        <span class="c-gray en">&gt;</span> 产品管理
+        <span class="c-gray en">&gt;</span> 产品列表
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont"></i></a>
+    </nav>
+    <div class="page-container">
+        <div class="cl pd-5 bg-1 bk-gray mt-20">
+            <span class="l">
+                <a href="javascript:;" onclick="category_add('添加产品','/admin/product_add')" class="btn btn-primary radius">
+                    <i class="Hui-iconfont">&#xe600;</i> 添加类别</a>
+            </span>
+            <span class="r">共有数据：<strong>{{count($products)}}</strong> 条</span>
+        </div>
+        <div class="mt-20">
+            <table class="table table-border table-bordered table-bg table-sort">
+                <thead>
+                <tr class="text-c">
+                    <th width="80">ID</th>
+                    <th width="100">名称</th>
+                    <th width="40">编号</th>
+                    <th width="90">父类别</th>
+                    <th width="50">预览图</th>
+                    <th width="100">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($products as $product)
+                    <tr class="text-c">
+                        <td>{{$product -> id}}</td>
+                        <td>{{$product -> name}}</td>
+                        <td>{{$product -> category_no}}</td>
+                        <td></td>
+                        <td></td>
+                        <td class="f-14 product-brand-manage">
+                            <a style="text-decoration:none" onclick="category_edit('编辑类别','/admin/category_edit?id={{$category->id}}')" href="javascript:;" title="编辑"><i class="Hui-iconfont"></i></a>
+                            <a style="text-decoration:none" class="ml-5" onclick='category_del("{{$category -> name}}", "{{$category -> id}}")' href="javascript:;" title="删除"><i class="Hui-iconfont"></i></a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+@endsection

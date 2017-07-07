@@ -33,8 +33,8 @@ class UploadController extends Controller {
 		$public_dir = sprintf('/upload/%s/%s/', $type, date('Ymd') );
 		$upload_dir = public_path() . $public_dir;
 		if( !file_exists($upload_dir) ) {
-      mkdir($upload_dir, 0777, true);
-    }
+            mkdir($upload_dir, 0777, true);
+        }
 		// 获取文件扩展名
 		$arr_ext = explode('.', $_FILES["file"]['name']);
 		$file_ext = count($arr_ext) > 1 && strlen( end($arr_ext) ) ? end($arr_ext) : "unknow";

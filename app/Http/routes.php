@@ -68,6 +68,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('category', 'Admin\CategoryController@toCategory');
     Route::get('category_add', 'Admin\CategoryController@toCategoryAdd');
     Route::get('category_edit', 'Admin\CategoryController@toCategoryEdit');
+
+    Route::get('product', 'Admin\ProductController@toProduct');
+    Route::get('product_add', 'Admin\ProductController@toProductAdd');
 });
 
 
