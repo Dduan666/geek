@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Entity\Category;
 use App\Entity\Product;
 use App\Entity\PdtContent;
-use App\Entity\PdtImage;
+use App\Entity\PdtImages;
 use App\Entity\CartItem;
 use Illuminate\Http\Request;
 
@@ -32,7 +32,7 @@ class GeekController extends Controller
     {
         $product = Product::find($product_id);
         $pdt_content = PdtContent::where('product_id', $product_id)->first();
-        $pdt_images = PdtImage::where('product_id', $product_id)->get();
+        $pdt_images = PdtImages::where('product_id', $product_id)->get();
 
         $count = 0;
 

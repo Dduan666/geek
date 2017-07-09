@@ -62,6 +62,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('category/add', 'Admin\CategoryController@CategoryAdd');
         Route::post('category/edit', 'Admin\CategoryController@CategoryEdit');
         Route::post('category/del', 'Admin\CategoryController@CategoryDel');
+        Route::post('product/add', 'Admin\ProductController@ProductAdd');
 
     });
 
@@ -71,6 +72,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('product', 'Admin\ProductController@toProduct');
     Route::get('product_add', 'Admin\ProductController@toProductAdd');
+    Route::get('product_edit', 'Admin\ProductController@toProductEdit');
+    Route::get('product_info', 'Admin\ProductController@toProductInfo');
 });
 
 
