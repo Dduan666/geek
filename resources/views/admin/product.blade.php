@@ -35,9 +35,11 @@
                         <td>{{$product->name}}</td>
                         <td>{{$product->summary}}</td>
                         <td>{{$product->price}}</td>
-                        <td>{{$product->category->name}}</td>
+                        <td>@if($product->category != null)
+                                {{$product->category->name}}
+                            @endif</td>
                         <td>@if($product->preview != null)
-                                <img src="{{$product->preview}}" alt="" style="width: 50px; height: 50px;">
+                                <img src="{{$product->preview}}" alt="预览图" style="width: 50px; height: 50px;">
                             @endif</td>
                         <td class="td-manage">
                             <a title="详情" href="javascript:;" onclick="product_info('产品详情','/admin/product_info?id={{$product->id}}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe695;</i></a>
@@ -64,6 +66,24 @@
         }
 
         function product_info(title, url) {
+            var index = layer.open({
+                type: 2,
+                title: title,
+                content: url
+            });
+            layer.full(index);
+        }
+
+        function product_edit(title, url) {
+            var index = layer.open({
+                type: 2,
+                title: title,
+                content: url
+            });
+            layer.full(index);
+        }
+
+        function product_del(title, url) {
             var index = layer.open({
                 type: 2,
                 title: title,

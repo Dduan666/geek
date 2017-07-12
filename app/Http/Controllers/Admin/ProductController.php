@@ -29,9 +29,13 @@ class ProductController extends Controller
         return view('admin.product_add');
     }
 
-    public function toProductEdit()
+    public function toProductEdit(Request $request)
     {
-        return view('admin.product_edit');
+        $id = $request -> input('id','');
+        $product = Product::find($id);
+//        $categories = Category::whereNull($product->category_id) -> get();
+
+        return view('admin.product_edit') -> with('product', $product);
     }
 
     public function toProductInfo()
